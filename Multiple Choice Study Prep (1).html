@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Multiple Choice Study Prep</title>
+<style>
+:root{--bg:#FFF0F6;--card:#fff;--tx:#6E123B;--mut:#AD7894;--pri:#B51F62;--hot:#E94F9B;--bl:#F8C8DE;--ok:#1f7a4a;--okbg:#dff5e8;--no:#b3261e;--nobg:#fde0dd;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a0a1a;--card:#3d1228;--tx:#FFD9EA;--mut:#d49ab6;--pri:#F06AA8;--hot:#E94F9B;--bl:#5a1d3b;--ok:#7be0a8;--okbg:#17402b;--no:#ff9a92;--nobg:#4a1a1a}}
+:root[data-theme="dark"]{--bg:#2a0a1a;--card:#3d1228;--tx:#FFD9EA;--mut:#d49ab6;--pri:#F06AA8;--hot:#E94F9B;--bl:#5a1d3b;--ok:#7be0a8;--okbg:#17402b;--no:#ff9a92;--nobg:#4a1a1a}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;background-image:radial-gradient(circle at 90% -10%,var(--bl),transparent 45%)}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+h1{margin:0;font-size:28px;letter-spacing:-.5px}h1 span{color:var(--hot)}
+.sub{color:var(--mut);margin:0 0 12px;font-size:14px}
+nav{display:flex;gap:6px;overflow-x:auto;padding:4px 0 12px}
+nav button{border:0;background:var(--bl);color:var(--tx);padding:9px 16px;border-radius:99px;font:600 14px inherit;cursor:pointer;white-space:nowrap}
+nav button.on{background:var(--pri);color:#fff}
+.card{background:var(--card);border-radius:20px;padding:20px;margin-bottom:14px;box-shadow:0 4px 18px rgba(181,31,98,.12)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:var(--card);border-radius:16px;padding:14px;border-top:4px solid var(--hot)}
+.stat b{display:block;font-size:26px;color:var(--pri)}.stat small{color:var(--mut)}
+.q{font-size:20px;font-weight:600;margin:6px 0 16px}
+.tag{display:inline-block;background:var(--bl);color:var(--tx);font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;letter-spacing:.5px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:2px solid var(--bl);background:transparent;color:var(--tx);border-radius:14px;padding:12px 14px;margin-bottom:10px;font:16px inherit;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--hot);background:var(--bl)}
+.opt i{font-style:normal;font-weight:700;background:var(--pri);color:#fff;border-radius:50%;width:28px;height:28px;display:grid;place-items:center;flex:none}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.no{border-color:var(--no);background:var(--nobg)}
+.opt.sel{border-color:var(--pri);background:var(--bl)}
+.btn{border:0;background:var(--pri);color:#fff;padding:11px 22px;border-radius:99px;font:600 15px inherit;cursor:pointer}
+.btn.alt{background:var(--bl);color:var(--tx)}
+.fb{margin:6px 0 12px;font-weight:600}.ex{color:var(--mut);font-size:14px;margin-bottom:12px}
+select,input,textarea{width:100%;font:15px inherit;padding:10px;border-radius:12px;border:2px solid var(--bl);background:var(--card);color:var(--tx);margin-bottom:10px}
+.row{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bl)}
+.row:last-child{border:0}.pill{background:var(--nobg);color:var(--no);font-weight:700;padding:2px 10px;border-radius:99px;font-size:13px;white-space:nowrap}
+.bar{height:10px;background:var(--bl);border-radius:9px;overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--hot),var(--pri))}
+.chart{overflow-x:auto}svg text{fill:var(--mut);font-size:11px}
+h2{margin:0 0 10px;font-size:18px}.muted{color:var(--mut)}
+</style></head><body><div class="wrap">
+<h1>Multiple Choice <span>Study Prep</span> ♡</h1><p class="sub">Learn it. Remember it. Own it. · <span id="sync">Local only</span></p>
+<nav id="nav"></nav><main id="app"></main></div>
+<script>
+var SEED=[
+["Biology","Which organelle produces most of the cell’s ATP?",["Golgi apparatus","Mitochondrion","Lysosome","Endoplasmic reticulum"],1,"Oxidative phosphorylation happens on the inner mitochondrial membrane."],
+["Biology","Which molecule carries amino acids to the ribosome?",["mRNA","rRNA","tRNA","DNA"],2,"tRNA matches its anticodon to the mRNA codon."],
+["Biology","What is the main function of the Golgi apparatus?",["Make ATP","Modify and package proteins","Digest waste","Store DNA"],1,"It processes and sorts proteins for secretion."],
+["Psychology","Which sleep stage is most associated with vivid dreaming?",["N1","N2","N3","REM"],3,"REM sleep features brain activity similar to waking."],
+["Psychology","A p-value below .05 usually means…",["The effect is large","The null is proven false","Results unlikely if the null were true","The study is replicable"],2,"It’s the probability of data this extreme if the null were true."],
+["Psychology","Which design best supports causal claims?",["Case study","Correlational survey","Randomised experiment","Naturalistic observation"],2,"Random assignment controls confounds."]];
+var MODS=[
+["Foundations in Clinical Psychology","Which therapy is built on the idea that thoughts, emotions and behaviours are linked?",["Psychoanalysis","Cognitive behavioural therapy","Person-centred therapy","Systemic family therapy"],1,"CBT targets unhelpful thinking patterns and behaviours to change emotions."],
+["Foundations in Clinical Psychology","What does ‘comorbidity’ mean?",["A disorder that is resistant to treatment","Two or more disorders co-occurring in the same person","A relapse after recovery","A side effect of medication"],1,"Comorbidity is very common, e.g. anxiety and depression."],
+["Foundations in Clinical Psychology","The diathesis–stress model proposes that disorders arise from…",["Stressful events alone","Genetic vulnerability alone","A vulnerability interacting with stress","Faulty learning only"],2,"Neither the predisposition nor the stressor is enough on its own."],
+["Foundations in Clinical Psychology","Exposure and response prevention is a first-line psychological treatment for which condition?",["Schizophrenia","Bipolar disorder","Obsessive–compulsive disorder","Anorexia nervosa"],2,"Clients face feared cues while resisting compulsions."],
+["Foundations in Clinical Psychology","Which design is the gold standard for testing whether a therapy works?",["Case study","Randomised controlled trial","Cross-sectional survey","Retrospective chart review"],1,"Random allocation controls for confounds."],
+["Foundations in Clinical Psychology","The sensitivity of a diagnostic test is…",["The proportion of non-cases correctly ruled out","The proportion of true cases correctly identified","The proportion of positive results that are correct","How consistent results are over time"],1,"Specificity is the proportion of non-cases correctly ruled out."],
+["Brain & Cognition","Which structure is most critical for forming new declarative memories?",["Cerebellum","Amygdala","Hippocampus","Basal ganglia"],2,"Patient H.M. lost hippocampal tissue and could not form new episodic memories."],
+["Brain & Cognition","Damage to Broca’s area typically produces…",["Fluent but meaningless speech","Effortful, non-fluent speech with relatively preserved comprehension","Loss of face recognition","Inability to read only"],1,"Wernicke’s aphasia is the fluent, poorly comprehended pattern."],
+["Brain & Cognition","In Baddeley’s model, which component holds visual and spatial information?",["Phonological loop","Central executive","Episodic buffer","Visuospatial sketchpad"],3,"The phonological loop handles verbal and acoustic information."],
+["Brain & Cognition","Which lobe contains the primary visual cortex?",["Frontal","Parietal","Temporal","Occipital"],3,"Visual input from the thalamus arrives in V1 in the occipital lobe."],
+["Brain & Cognition","The Stroop effect shows that…",["Colour perception is innate","Automatic reading interferes with controlled colour naming","Working memory is limited to seven items","Attention cannot be divided"],1,"Naming ink colour is slower when the word names a different colour."],
+["Brain & Cognition","Which neurotransmitter is most associated with reward prediction and motivation?",["GABA","Dopamine","Acetylcholine","Glutamate"],1,"Dopamine neurons signal reward prediction errors."]];
+function addModules(){S.cfg=S.cfg||{newLimit:20,ret:.9};var have={};S.qs.forEach(function(q){have[q.id]=1});var ch=false;MODS.forEach(function(r,i){var id="m"+i;if(!have[id]&&(S.del||[]).indexOf(id)<0){S.qs.push({id:id,deck:r[0],q:r[1],o:r[2],a:r[3],ex:r[4]});ch=true}});if(ch)save()}
+var S=load();addModules();
+function load(){var s=null;try{s=JSON.parse(localStorage.getItem("pinkprep.v1"))}catch(e){}
+if(!s){s={qs:SEED.map(function(r,i){return{id:"s"+i,deck:r[0],q:r[1],o:r[2],a:r[3],ex:r[4]}}),log:[],sch:{},fresh:1}}return s}
+function save(){S.upd=Date.now();persist();if(DBX){clearTimeout(PT);PT=setTimeout(push,2000)}}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var tab="study",deck="All",cur=null,picked=null,order=[],only=null;
+var TABS=[["study","Study"],["stats","Analytics"],["data","Data"],["weak","Weak spots"],["exam","Exam"],["cards","Cards"],["add","Add / import"],["set","Settings"]];
+function nav(){document.getElementById("nav").innerHTML=TABS.map(function(t){return'<button class="'+(t[0]==tab?"on":"")+'" onclick="go(\''+t[0]+'\')">'+t[1]+'</button>'}).join("")}
+function go(t){tab=t;only=null;editId=null;pend=undefined;if(t=="study")next();render()}
+function decks(){var d={};S.qs.forEach(function(q){d[q.deck]=1});return["All"].concat(Object.keys(d))}
+function pool(){return S.qs.filter(function(q){return(deck=="All"||q.deck==deck)&&(tag=="All"||(q.tags||[]).indexOf(tag)>-1)})}
+function dueList(){var n=Date.now(),t0=new Date();t0.setHours(0,0,0,0);var left=S.cfg.newLimit-S.log.filter(function(x){return!x.rev&&x.t>=t0}).length;return pool().filter(function(q){var s=S.sch[q.id];return s?s.due<=n:left>0})}
+function next(){picked=null;rated=false;var L=only?S.qs.filter(function(q){return q.id==only}):dueList();
+cur=L.length?L[Math.floor(Math.random()*L.length)]:null;
+if(cur){order=[0,1,2,3];for(var i=3;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=order[i];order[i]=order[j];order[j]=t}}}
+var FW=[0.4872,1.4003,3.7145,13.8206,5.1618,1.2298,0.8975,0.031,1.6474,0.1367,1.0461,2.1072,0.0793,0.3246,1.587,0.2272,2.8755],F=19/81,RET=0.9,rated=false;
+function cl(x,a,b){return Math.min(b,Math.max(a,x))}
+function R(s,t){return s&&s.S?Math.pow(1+F*Math.max(0,(t||Date.now())-s.last)/864e5/s.S,-.5):null}
+function fsrs(s,g){var now=Date.now(),n={reps:0,lapses:0};
+if(!s||!s.S){n.S=FW[g-1];n.D=cl(FW[4]-FW[5]*(g-3),1,10)}
+else{var r=R(s,now),d=cl(FW[7]*FW[4]+(1-FW[7])*(s.D-FW[6]*(g-3)),1,10);n.D=d;n.reps=s.reps;n.lapses=s.lapses;
+if(g==1){n.S=Math.min(s.S,FW[11]*Math.pow(d,-FW[12])*(Math.pow(s.S+1,FW[13])-1)*Math.exp((1-r)*FW[14]));n.lapses++}
+else n.S=s.S*(1+Math.exp(FW[8])*(11-d)*Math.pow(s.S,-FW[9])*(Math.exp((1-r)*FW[10])-1)*(g==2?FW[15]:1)*(g==4?FW[16]:1))}
+n.S=Math.max(.1,n.S);n.reps++;n.last=now;
+var iv=Math.max(1,Math.round(n.S/F*(Math.pow(S.cfg.ret,-2)-1)));n.due=g==1?now+6e5:now+iv*864e5;return n}
+function answer(p){if(picked!==null)return;picked=p;var ok=p==cur.a,s=S.sch[cur.id];
+S.log.push({id:cur.id,t:Date.now(),ok:ok?1:0,p:p,r:R(s),rev:s&&s.S?1:0});
+if(!ok)S.sch[cur.id]=fsrs(s,1);rated=!ok;save();render()}
+function rate(g){S.sch[cur.id]=fsrs(S.sch[cur.id],g);rated=true;save();render()}
+function rateBtns(){var s=S.sch[cur.id];return'<div class="muted" style="font-size:13px;margin-bottom:6px">How easy was that?</div>'+[[2,'Hard'],[3,'Good'],[4,'Easy']].map(function(g){var n=fsrs(s,g[0]),d=Math.round((n.due-Date.now())/864e5);return'<button class="btn'+(g[0]==3?'':' alt')+'" style="margin:0 8px 8px 0" onclick="rate('+g[0]+')">'+g[1]+' · '+(d<1?'<1d':d+'d')+'</button>'}).join('')}
+document.addEventListener('keydown',function(e){if(tab!=='study'||!cur||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;var k=e.key;if(picked===null){if('1234'.indexOf(k)>-1&&k.length==1)answer(order[+k-1])}else if(picked===cur.a&&!rated){if(k===' '||k==='Enter')rate(3);else if('234'.indexOf(k)>-1&&k.length==1)rate(+k);else return;e.preventDefault()}else if(k===' '||k==='Enter'){e.preventDefault();next();render()}});
+var editId=null;
+function ed(id){editId=id;tab='add';render()}
+function fillEdit(){var q=S.qs.find(function(x){return x.id==editId});if(!q)return;document.getElementById('d').value=q.deck;document.getElementById('q').value=q.q;for(var i=0;i<4;i++)document.getElementById('o'+i).value=q.o[i];document.getElementById('c').value=q.a;document.getElementById('e').value=q.ex||'';document.getElementById('tg').value=(q.tags||[]).join(', ');document.getElementById('sv').textContent='Save changes'}
+function del(id){if(!confirm('Delete this question and its history?'))return;S.qs=S.qs.filter(function(q){return q.id!=id});S.log=S.log.filter(function(x){return x.id!=id});delete S.sch[id];S.del=(S.del||[]).concat(id);save();next();render()}
+function cardsView(){var L=pool();return'<div class="card">'+filters(0)+'<h2>'+L.length+' cards</h2>'+L.map(function(q){var s=S.sch[q.id];return'<div class="row"><div><div>'+esc(q.q)+'</div><small class="muted">'+esc(q.deck)+(s&&s.S?' · stability '+s.S.toFixed(1)+'d · difficulty '+s.D.toFixed(1):' · new')+'</small></div><div style="white-space:nowrap"><button class="btn alt" onclick="ed(&quot;'+q.id+'&quot;)">Edit</button> <button class="btn alt" onclick="del(&quot;'+q.id+'&quot;)">Delete</button></div></div>'}).join('')+'</div>'}
+function setView(){return'<div class="card"><h2>Settings</h2><p class="muted" style="margin:0 0 4px">New cards per day</p><input type="number" min="0" max="500" value="'+S.cfg.newLimit+'" onchange="S.cfg.newLimit=Math.max(0,+this.value||0);save()"><p class="muted" style="margin:0 0 4px">Desired retention</p><select onchange="S.cfg.ret=+this.value;save()">'+[.8,.85,.9,.95].map(function(r){return'<option value="'+r+'"'+(r==S.cfg.ret?' selected':'')+'>'+Math.round(r*100)+'%</option>'}).join('')+'</select><p class="muted" style="font-size:13px">Higher retention means shorter intervals and more reviews. Changes apply to future reviews.</p></div>'}
+var DBX=null,BASE='',PT=0,FULL=true,tag='All',pend,EX=null,TI=null;
+function setSync(t){var e=document.getElementById('sync');if(e)e.textContent=t}
+function persist(){try{localStorage.setItem('pinkprep.v1',JSON.stringify(S))}catch(e){}}
+function core(nl){return JSON.stringify({qs:S.qs.map(function(q){var c=Object.assign({},q);if(c.img){c.hasImg=1;delete c.img}return c}),sch:S.sch,cfg:S.cfg,del:S.del||[],exams:S.exams||[],nl:nl})}
+async function push(){if(!DBX)return;try{setSync('Syncing…');var nl=Math.ceil(S.log.length/600),from=FULL?0:Math.max(0,nl-2);await DBX.doc(BASE+'/core').set({j:core(nl),u:S.upd||Date.now()});for(var i=from;i<nl;i++)await DBX.doc(BASE+'/log'+i).set({j:JSON.stringify(S.log.slice(i*600,i*600+600))});for(var q of S.qs)if(q.img&&!q.sy){await DBX.doc(BASE+'/img_'+q.id).set({d:q.img});q.sy=1}FULL=false;persist();setSync('Synced ☁')}catch(e){setSync('Sync error')}}
+async function pull(){var c=await DBX.doc(BASE+'/core').get();if(c.exists){var r=c.data(),d=JSON.parse(r.j),lg=[];for(var i=0;i<(d.nl||0);i++){var s=await DBX.doc(BASE+'/log'+i).get();if(s.exists)lg=lg.concat(JSON.parse(s.data().j))}
+var seen={};S.log.forEach(function(x){seen[x.t+'|'+x.id]=1});var add=lg.filter(function(x){return!seen[x.t+'|'+x.id]});
+if(S.fresh||r.u>(S.upd||0)){var im={};S.qs.forEach(function(q){if(q.img)im[q.id]=q.img});S.qs=d.qs;S.sch=d.sch;S.cfg=d.cfg||S.cfg;S.del=d.del;S.exams=d.exams;S.upd=r.u;S.qs.forEach(function(q){if(im[q.id]){q.img=im[q.id];q.sy=1}})}
+if(add.length){S.log=S.log.concat(add).sort(function(a,b){return a.t-b.t});FULL=true}
+for(var q of S.qs)if(q.hasImg&&!q.img){var g=await DBX.doc(BASE+'/img_'+q.id).get();if(g.exists){q.img=g.data().d;q.sy=1}}}
+S.fresh=0;persist();if(picked===null)next();render();await push()}
+async function initSync(){try{if(!window.claude)return;var db=await claude.use('db'),u=await claude.use('user');if(!db||!u)return;var id=await u.id();if(!id)return;DBX=db;BASE='data/users/'+id;setSync('Syncing…');await pull()}catch(e){DBX=null;setSync('Local only')}}
+function opts(a,c){return a.map(function(d){return'<option'+(d==c?' selected':'')+'>'+esc(d)+'</option>'}).join('')}
+function tags(){var t={};S.qs.forEach(function(q){(q.tags||[]).forEach(function(x){t[x]=1})});return['All'].concat(Object.keys(t).sort())}
+function filters(n){return'<select onchange="deck=this.value;'+(n?'next();':'')+'render()">'+opts(decks(),deck)+'</select><select onchange="tag=this.value;'+(n?'next();':'')+'render()">'+opts(tags(),tag)+'</select>'}
+function tagPills(q){return(q.tags||[]).map(function(t){return' <span class="tag">#'+esc(t)+'</span>'}).join('')}
+function qimg(q){return q.img?'<img src="'+q.img+'" style="max-width:100%;border-radius:12px;margin:0 0 14px">':''}
+function pickImg(el){var f=el.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,720/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);pend=c.toDataURL('image/jpeg',.72);msg('Image attached.')};im.src=r.result};r.readAsDataURL(f)}
+function mmss(s){return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+function startExam(){var n=+document.getElementById('xn').value,m=+document.getElementById('xm').value,p=pool().slice().sort(function(){return Math.random()-.5});if(!p.length)return;if(n)p=p.slice(0,n);EX={qs:p.map(function(q){return{q:q,ord:[0,1,2,3].sort(function(){return Math.random()-.5}),pick:null}}),i:0,t0:Date.now(),end:m?Date.now()+m*6e4:0,done:0};clearInterval(TI);TI=setInterval(tick,1000);render()}
+function tick(){if(!EX||EX.done||tab!=='exam')return;var el=document.getElementById('tm');if(EX.end){var s=Math.max(0,Math.round((EX.end-Date.now())/1000));if(el)el.textContent=mmss(s);if(!s)finish()}else if(el)el.textContent=mmss(Math.round((Date.now()-EX.t0)/1000))}
+function xpick(o){EX.qs[EX.i].pick=o;render()}
+function xgo(d){EX.i=cl(EX.i+d,0,EX.qs.length-1);render()}
+function finish(){if(EX.done)return;EX.done=1;clearInterval(TI);EX.sc=EX.qs.filter(function(x){return x.pick===x.q.a}).length;EX.secs=Math.round((Date.now()-EX.t0)/1000);S.exams=(S.exams||[]).concat({t:Date.now(),deck:deck,tag:tag,n:EX.qs.length,sc:EX.sc,secs:EX.secs});save();render()}
+function examView(){if(!EX){var hs=(S.exams||[]).slice(-8).reverse();return'<div class="card"><h2>Timed exam</h2><p class="muted" style="font-size:14px">No feedback until you finish, and it won’t change your review schedule.</p>'+filters(0)+'<select id="xn"><option value="10">10 questions</option><option value="20">20 questions</option><option value="50">50 questions</option><option value="0">All questions</option></select><select id="xm"><option value="0">Untimed</option><option value="10">10 minutes</option><option value="20">20 minutes</option><option value="30">30 minutes</option><option value="60">60 minutes</option></select><button class="btn" onclick="startExam()">Start exam</button></div>'+(hs.length?'<div class="card"><h2>Past exams</h2>'+hs.map(function(e){return'<div class="row"><div>'+new Date(e.t).toLocaleDateString()+' · '+esc(e.deck)+(e.tag&&e.tag!='All'?' #'+esc(e.tag):'')+'</div><b>'+e.sc+'/'+e.n+' ('+Math.round(e.sc/e.n*100)+'%)</b></div>'}).join('')+'</div>':'')}
+if(EX.done)return'<div class="card"><h2>'+EX.sc+' / '+EX.qs.length+' · '+Math.round(EX.sc/EX.qs.length*100)+'%</h2><p class="muted">Time: '+mmss(EX.secs)+'</p><button class="btn" onclick="EX=null;render()">New exam</button></div>'+EX.qs.map(function(x,i){var ok=x.pick===x.q.a;return'<div class="card"><span class="tag">'+(ok?'✓ Correct':'✗ '+(x.pick===null?'Unanswered':'Wrong'))+'</span><div class="q" style="font-size:17px">'+(i+1)+'. '+esc(x.q.q)+'</div>'+qimg(x.q)+x.ord.map(function(oi){var c='opt';if(oi===x.q.a)c+=' ok';else if(oi===x.pick)c+=' no';return'<div class="'+c+'" style="cursor:default">'+esc(x.q.o[oi])+'</div>'}).join('')+(x.q.ex?'<div class="ex">'+esc(x.q.ex)+'</div>':'')+'</div>'}).join('');
+var x=EX.qs[EX.i];return'<div class="card"><div class="row"><span class="tag">Question '+(EX.i+1)+' of '+EX.qs.length+'</span><b id="tm">…</b></div><div class="q">'+esc(x.q.q)+'</div>'+qimg(x.q)+x.ord.map(function(oi,pos){return'<button class="opt'+(x.pick===oi?' sel':'')+'" onclick="xpick('+oi+')"><i>'+'ABCD'[pos]+'</i>'+esc(x.q.o[oi])+'</button>'}).join('')+'<button class="btn alt" onclick="xgo(-1)">← Prev</button> <button class="btn alt" onclick="xgo(1)">Next →</button> <button class="btn" onclick="if(confirm(&quot;Finish the exam?&quot;))finish()">Finish</button></div>'}
+function bars(v,l,fm){var w=Math.max(300,v.length*30),h=150,mx=Math.max(1,Math.max.apply(null,v)),bw=w/v.length;return'<div class="chart"><svg viewBox="0 0 '+w+' '+(h+22)+'" width="'+w+'" height="'+(h+22)+'">'+v.map(function(x,i){var bh=x/mx*(h-14),cx=i*bw+bw/2;return'<rect x="'+(i*bw+3)+'" y="'+(h-bh)+'" width="'+(bw-6)+'" height="'+bh+'" rx="4" fill="var(--hot)"><title>'+l[i]+': '+(fm?fm(x,i):x)+'</title></rect>'+(x?'<text x="'+cx+'" y="'+(h-bh-3)+'" text-anchor="middle">'+x+'</text>':'')+'<text x="'+cx+'" y="'+(h+14)+'" text-anchor="middle">'+l[i]+'</text>'}).join('')+'</svg></div>'}
+function heat(){var d={},mx=1,c='';S.log.forEach(function(x){var k=new Date(x.t).toDateString();d[k]=(d[k]||0)+1;mx=Math.max(mx,d[k])});var t=new Date();t.setHours(0,0,0,0);var st=new Date(t);st.setDate(t.getDate()-t.getDay()-25*7);
+for(var i=0;i<182;i++){var x=new Date(st);x.setDate(st.getDate()+i);if(x>t)break;var n=d[x.toDateString()]||0;c+='<rect x="'+Math.floor(i/7)*15+'" y="'+i%7*15+'" width="12" height="12" rx="3" fill="'+(n?'var(--pri)':'var(--bl)')+'" fill-opacity="'+(n?[.25,.45,.7,1][Math.ceil(n/mx*4)-1]:.45)+'"><title>'+x.toDateString()+': '+n+' answers</title></rect>'}
+return'<div class="chart"><svg viewBox="0 0 390 105" width="390" height="105">'+c+'</svg></div>'}
+function dayStats(){var u={};S.log.forEach(function(x){var d=new Date(x.t);d.setHours(0,0,0,0);u[+d]=1});var k=Object.keys(u).map(Number).sort(),best=0,run=0;k.forEach(function(v,i){run=i&&v-k[i-1]<=1.5*864e5?run+1:1;best=Math.max(best,run)});return[k.length,best]}
+function hist(a,e){var o=e.map(function(){return 0});a.forEach(function(v){for(var i=e.length-1;i>=0;i--)if(v>=e[i]){o[i]++;break}});return o}
+function dataView(){var cs=S.qs.filter(function(q){return S.sch[q.id]&&S.sch[q.id].S}).map(function(q){var s=S.sch[q.id];return{S:s.S,D:s.D,R:R(s)}});
+var rv=S.log.filter(function(x){return x.rev}),tr=rv.length?Math.round(rv.filter(function(x){return x.ok}).length/rv.length*100):null,ar=cs.length?Math.round(cs.reduce(function(a,c){return a+c.R},0)/cs.length*100):null,ds=dayStats();
+var t0=new Date();t0.setHours(0,0,0,0);var fc=[],fl=[],hc=[],ho=[],hl=[];for(var i=0;i<14;i++){fc.push(0);fl.push(i?'+'+i:'Now')}for(i=0;i<24;i++){hc.push(0);ho.push(0);hl.push(i)}
+Object.keys(S.sch).forEach(function(id){var s=S.sch[id];if(!s.S)return;var d=Math.max(0,Math.floor((s.due-t0)/864e5));if(d<14)fc[d]++});
+S.log.forEach(function(x){var hr=new Date(x.t).getHours();hc[hr]++;ho[hr]+=x.ok});var ha=hc.map(function(n,i){return n?Math.round(ho[i]/n*100):null});
+function card(t,s,x){return'<div class="card"><h2>'+t+'</h2>'+x+'<p class="muted" style="font-size:13px;margin:6px 0 0">'+s+'</p></div>'}
+var h='<div class="grid"><div class="stat"><b>'+(tr===null?'—':tr+'%')+'</b><small>True retention</small></div><div class="stat"><b>'+(ar===null?'—':ar+'%')+'</b><small>Avg retrievability now</small></div><div class="stat"><b>'+ds[0]+'</b><small>Days active</small></div><div class="stat"><b>'+ds[1]+'</b><small>Longest streak</small></div></div>';
+var dd=[1,2,3,4,5,6,7,8,9,10],rr=[0,.1,.2,.3,.4,.5,.6,.7,.8,.9];
+return h+card('Activity calendar','Each square is a day; darker means more answers (last 26 weeks).',heat())+card('Review forecast','Cards due per day over the next 14 days.',bars(fc,fl))+card('Hourly breakdown','Answers by hour of day. Hover a bar for accuracy.',bars(hc,hl,function(x,i){return x+' answers, '+(ha[i]===null?'–':ha[i]+'% correct')}))+card('Card stability','Days until recall probability drops to 90%.',bars(hist(cs.map(function(c){return c.S}),[0,1,3,7,14,30,90]),['<1d','1–3d','3–7d','7–14d','14–30d','30–90d','90d+']))+card('Card difficulty','1 = easy, 10 = hard.',bars(hist(cs.map(function(c){return c.D}),dd),dd))+card('Retrievability','Estimated chance of recalling each card right now.',bars(hist(cs.map(function(c){return c.R}),rr),['0%','10%','20%','30%','40%','50%','60%','70%','80%','90%']))}
+function stats(id){var l=S.log.filter(function(x){return!id||x.id==id});var c=l.filter(function(x){return x.ok}).length;
+return{n:l.length,c:c,w:l.length-c,acc:l.length?Math.round(c/l.length*100):null}}
+function streak(){var d={};S.log.forEach(function(x){d[new Date(x.t).toDateString()]=1});var n=0,t=new Date();
+if(!d[t.toDateString()])t.setDate(t.getDate()-1);while(d[t.toDateString()]){n++;t.setDate(t.getDate()-1)}return n}
+function weak(){return S.qs.map(function(q){var s=stats(q.id);return{q:q,n:s.n,w:s.w,rate:s.n?s.w/s.n:0}}).filter(function(x){return x.w>0}).sort(function(a,b){return b.w-a.w||b.rate-a.rate})}
+function studyView(){var h='<div class="card">'+filters(1);
+if(only)h+='<p class="muted">Practising one question. <a href="#" onclick="go(\'study\');return false">Back to queue</a></p>';
+if(!cur)return h+'<h2>All caught up ♡</h2><p class="muted">No questions are due in this deck. Come back later, or add more.</p><button class="btn alt" onclick="only=null;cur=pool()[0]||null;if(cur)next2();render()">Practise anyway</button></div>';
+h+='<span class="tag">'+esc(cur.deck.toUpperCase())+'</span> <span class="tag">'+dueList().length+' DUE</span>'+tagPills(cur)+'<div class="q">'+esc(cur.q)+'</div>'+qimg(cur);
+order.forEach(function(oi,pos){var c="opt";if(picked!==null){if(oi==cur.a)c+=" ok";else if(oi==picked)c+=" no"}
+h+='<button class="'+c+'" '+(picked!==null?"disabled":"")+' onclick="answer('+oi+')"><i>'+"ABCD"[pos]+'</i>'+esc(cur.o[oi])+'</button>'});
+if(picked!==null){var ok=picked==cur.a;h+='<div class="fb" style="color:var(--'+(ok?"ok":"no")+')">'+(ok?"That’s right!":"Not quite.")+'</div>'+(cur.ex?'<div class="ex">'+esc(cur.ex)+'</div>':"")+(ok&&!rated?rateBtns():'<button class="btn" onclick="next();render()">Next question →</button>')}
+return h+'</div>'}
+function next2(){var p=pool();cur=p[Math.floor(Math.random()*p.length)];picked=null;order=[0,1,2,3].sort(function(){return Math.random()-.5})}
+function curve(){var days={};S.log.forEach(function(x){var k=new Date(x.t).toISOString().slice(0,10);(days[k]=days[k]||[0,0]);days[k][0]+=x.ok;days[k][1]++});
+var ks=Object.keys(days).sort().slice(-14);if(ks.length<1)return'<p class="muted">Answer a few questions and your progression curve will appear here.</p>';
+var W=Math.max(320,ks.length*52),H=180,pl=34,pb=24,pts=ks.map(function(k,i){var a=days[k][0]/days[k][1];return[pl+(ks.length>1?i*(W-pl-12)/(ks.length-1):(W-pl)/2),12+(1-a)*(H-12-pb),Math.round(a*100),k.slice(5)]});
+var g=[0,50,100].map(function(v){var y=12+(1-v/100)*(H-12-pb);return'<line x1="'+pl+'" x2="'+W+'" y1="'+y+'" y2="'+y+'" stroke="var(--bl)"/><text x="2" y="'+(y+4)+'">'+v+'%</text>'}).join("");
+var line=pts.map(function(p){return p[0]+","+p[1]}).join(" ");
+return'<div class="chart"><svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'">'+g+'<polyline points="'+line+'" fill="none" stroke="var(--pri)" stroke-width="3" stroke-linejoin="round"/>'+pts.map(function(p){return'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4.5" fill="var(--hot)"/><text x="'+(p[0]-14)+'" y="'+(H-6)+'">'+p[3]+'</text>'}).join("")+'</svg></div>'}
+function statsView(){var s=stats(),b=S.log.length?'':'';
+var h='<div class="grid"><div class="stat"><b>'+(s.acc===null?"—":s.acc+"%")+'</b><small>Accuracy</small></div><div class="stat"><b>'+s.n+'</b><small>Answers</small></div><div class="stat"><b>'+s.c+'</b><small>Correct</small></div><div class="stat"><b>'+streak()+'</b><small>Day streak</small></div></div>';
+h+='<div class="card"><h2>Progression curve</h2>'+curve()+'<p class="muted" style="font-size:13px;margin:6px 0 0">Daily accuracy, last 14 study days</p></div>';
+h+='<div class="card"><h2>Accuracy by deck</h2>'+decks().slice(1).map(function(d){var ids=S.qs.filter(function(q){return q.deck==d}).map(function(q){return q.id}),l=S.log.filter(function(x){return ids.indexOf(x.id)>-1}),a=l.length?Math.round(l.filter(function(x){return x.ok}).length/l.length*100):0;
+return'<div style="margin-bottom:10px"><b>'+esc(d)+'</b> <span class="muted">'+(l.length?a+"% · "+l.length+" answers":"no answers yet")+'</span><div class="bar"><i style="width:'+a+'%"></i></div></div>'}).join("")+'</div>';
+return h}
+function weakView(){var w=weak();if(!w.length)return'<div class="card"><h2>No weak spots yet</h2><p class="muted">Questions you get wrong will be ranked here, most-missed first.</p></div>';
+return'<div class="card"><h2>Most problematic questions</h2>'+w.map(function(x){return'<div class="row"><div><div>'+esc(x.q.q)+'</div><small class="muted">'+esc(x.q.deck)+' · wrong '+x.w+' of '+x.n+' ('+Math.round(x.rate*100)+'% error)</small></div><div><button class="btn alt" onclick="only=\''+x.q.id+'\';tab=\'study\';next();render()">Practise</button></div></div>'}).join("")+'</div>'}
+function addView(){return'<div class="card"><h2>Add a question</h2><input id="d" placeholder="Deck (e.g. Biology)"><input id="tg" placeholder="Tags (comma separated)"><p class="muted" style="margin:0 0 4px;font-size:13px">Question image (optional)</p><input id="im" type="file" accept="image/*" onchange="pickImg(this)"><textarea id="q" rows="2" placeholder="Question"></textarea><input id="o0" placeholder="Option A"><input id="o1" placeholder="Option B"><input id="o2" placeholder="Option C"><input id="o3" placeholder="Option D"><select id="c"><option value="0">Correct: A</option><option value="1">Correct: B</option><option value="2">Correct: C</option><option value="3">Correct: D</option></select><input id="e" placeholder="Explanation (optional)"><button class="btn" id="sv" onclick="addQ()">Add question</button> <button class="btn alt" onclick="editId=null;render()">Clear</button></div>'+
+'<div class="card"><h2>Bulk import</h2><p class="muted" style="font-size:14px">One question per line, separated by tabs or | :<br>deck | question | A | B | C | D | correct (1–4) | explanation | tags (optional, comma separated)</p><textarea id="bulk" rows="5"></textarea><button class="btn" onclick="bulk()">Import</button> <button class="btn alt" onclick="exp()">Copy backup</button> <button class="btn alt" onclick="if(confirm(\'Delete all progress and questions?\')){localStorage.removeItem(\'pinkprep.v1\');S=load();S.fresh=0;addModules();save();render()}">Reset</button><p class="muted" id="msg"></p></div>'}
+function v(i){return document.getElementById(i).value.trim()}
+function addQ(){var o=[v("o0"),v("o1"),v("o2"),v("o3")];if(!v("q")||o.some(function(x){return!x}))return msg("Please fill in the question and all four options.");
+var nq={deck:v('d')||'General',q:v('q'),o:o,a:+v('c'),ex:v('e'),tags:v('tg').split(',').map(function(t){return t.trim()}).filter(Boolean)},was=!!editId;if(pend!==undefined){nq.img=pend;nq.sy=0}if(was){Object.assign(S.qs.find(function(x){return x.id==editId}),nq);editId=null}else{nq.id='u'+Date.now();S.qs.push(nq)}pend=undefined;save();render();msg(was?'Saved changes ♡':'Added ♡')}
+function bulk(){var n=0;v("bulk").split("\n").forEach(function(l,i){var p=l.split(/\t|\|/).map(function(x){return x.trim()});if(p.length<7)return;var c=parseInt(p[6])-1;if(!(c>=0&&c<4))return;
+S.qs.push({id:"u"+Date.now()+i,deck:p[0]||"General",q:p[1],o:p.slice(2,6),a:c,ex:p[7]||"",tags:(p[8]||'').split(',').map(function(t){return t.trim()}).filter(Boolean)});n++});save();render();msg("Imported "+n+" questions.")}
+function exp(){var t=JSON.stringify(S);try{navigator.clipboard.writeText(t);msg("Backup copied to clipboard.")}catch(e){msg("Couldn’t copy automatically.")}}
+function msg(t){var m=document.getElementById("msg");if(m)m.textContent=t}
+function render(){nav();document.getElementById("app").innerHTML=tab=="study"?studyView():tab=="stats"?statsView():tab=="data"?dataView():tab=="weak"?weakView():tab=="exam"?examView():tab=="cards"?cardsView():tab=="set"?setView():addView();if(tab=="add"&&editId)fillEdit();if(tab=="exam")tick()}
+next();render();initSync();
+</script></body></html>
